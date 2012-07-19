@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <title>BalusC Code - Using datatables</title>
+        
+        <h:outputStylesheet library="css" name="mycss.css" />
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:dataTable value="#{myBean.dataList}" var="dataItem" binding="#{myBean.dataTable}" rows="10"
+                         rowClasses="row1,row2" styleClass="dataTable">
+
+                <f:facet name="header">
+                    <h:outputText value="My own plan JSF DataTable" />
+                </f:facet>
+                
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="R#" />
+                    </f:facet>
+                    <h:outputText value="#{myBean.dataTable.rowIndex + 1}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Select" />
+                    </f:facet>
+                    <h:selectBooleanCheckbox value="#{myBean.selectedIds[dataItem.id]}" rendered="#{dataItem.id != null}" />
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink actionListener="#{myBean.sortDataList}">
+                            <f:attribute name="sortField" value="getId" />
+                            <h:outputText value="ID" />
+                        </h:commandLink>
+
+                    </f:facet>
+                    <h:outputText value="#{dataItem.id}" rendered="#{dataItem.id != null}" />
+                    <h:outputText value="new" rendered="#{dataItem.id == null}" />
+
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink actionListener="#{myBean.sortDataList}">
+                            <f:attribute name="sortField" value="getName" />
+                            <h:outputText value="Name" />
+                        </h:commandLink>
+
+                    </f:facet>
+                    <h:outputText value="#{dataItem.name}" rendered="#{dataItem.id != null}" />
+                    <h:inputText value="#{dataItem.name}" rendered="#{dataItem.id == null}" styleClass="input" />
+
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">
+                        <h:commandLink actionListener="#{myBean.sortDataList}">
+                            <f:attribute name="sortField" value="getValue" />
+                            <h:outputText value="Value" />
+                        </h:commandLink>
+
+                    </f:facet>
+                    <h:outputText value="#{dataItem.value}" rendered="#{dataItem.id != null}" />
+                    <h:inputText value="#{dataItem.value}" rendered="#{dataItem.id == null}" styleClass="input" />
+
+                </h:column>
+
+                <h:column>
+
+                    <h:commandLink value="doit" action="#{myBean.editDataItem}">
+                        <f:setPropertyActionListener target="#{myBean.dataItem}" value="#{dataItem}" />
+                    </h:commandLink>
+
+                </h:column>
+                <f:facet name="footer">
+                    <h:panelGroup>
+                        <h:commandButton value="first" action="#{myBean.pageFirst}"
+                                         disabled="#{myBean.dataTable.first == 0}" />
+                        <h:commandButton value="prev" action="#{myBean.pagePrevious}"
+                                         disabled="#{myBean.dataTable.first == 0}" />
+                        <h:commandButton value="next" action="#{myBean.pageNext}"
+                                         disabled="#{myBean.dataTable.first + myBean.dataTable.rows >= myBean.dataTable.rowCount}" />
+                        <h:commandButton value="last" action="#{myBean.pageLast}"
+                                         disabled="#{myBean.dataTable.first + myBean.dataTable.rows >= myBean.dataTable.rowCount}" />
+                    </h:panelGroup>
+                </f:facet>
+            </h:dataTable>
+
+            <hr />
+            <h:commandButton value="Add" action="#{myBean.addNewDataItem}" />
+            <h:commandButton value="Get selected items" action="#{myBean.getSelectedItems}" />
+            <h:commandButton value="Test binding" action="#{myBean.testBinding}" />
+            <hr />
+
+            <h:panelGrid columns="3" rendered="#{myBean.dataItem != null}">
+                <h:outputText value="ID" />
+                <h:inputText id="inId" value="#{myBean.dataItem.id}" 
+                             required="true" requiredMessage="Id ist erforderlich!" />
+                <h:message for="inId" styleClass="error" />
+
+                <h:outputText value="Name" />
+                <h:inputText id="inName" value="#{myBean.dataItem.name}" 
+                             required="true" requiredMessage="Name ist erforderlich!" />
+                <h:message for="inName" styleClass="error" />
+
+                <h:outputText value="Value" />
+                <h:inputText id="inValue" value="#{myBean.dataItem.value}" 
+                             required="true" requiredMessage="Value ist erforderlich!" />
+                <h:message for="inValue" styleClass="error" />
+
+                <h:commandButton value="Save" action="#{myBean.doSaveItem}"/>
+
+            </h:panelGrid>
+            <hr />
+            
+            <h:panelGrid id="baseData" columns="2">
+                <h:outputText value="Dropdown" />
+                <h:selectOneMenu value="#{myBean.dropdownValue}">
+                    
+                    <f:selectItem itemValue="EINS" />
+                    <f:selectItem itemValue="ZWEI" />
+                    
+                    <f:ajax render="showData"/>
+                </h:selectOneMenu>
+            </h:panelGrid>
+            <h:panelGrid id="showData" columns="2">
+                <h:outputText value="Dropdown" />
+                <h:outputText value="#{myBean.dropdownValue}" />
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

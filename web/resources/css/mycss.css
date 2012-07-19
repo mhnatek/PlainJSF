@@ -1,0 +1,55 @@
+/* 
+    Document   : mycss
+    Created on : 31.05.2012, 22:20:26
+    Author     : Markus
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+body, p, input, button {
+    font: normal 8pt verdana, helvetica, sans-serif;
+}
+
+.row1 {
+    background-color: #ddd;
+}
+.row2 {
+    background-color: #bbb;
+}
+
+table.dataTable {
+    width: 500px;
+    margin-bottom: 20px;
+}
+table.dataTable th {
+    padding: 1px;
+    background-color: #666;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.dataTable th a {
+    color: #fff;
+}
+
+table.dataTable tfoot {
+    background-color: #999;
+}
+
+form .error {
+    color: red;
+}
+
+form input {
+    margin: 0px 1px;
+    padding: 1px;
+}
+
+form .input {
+    border: 1px solid #666;
+}
