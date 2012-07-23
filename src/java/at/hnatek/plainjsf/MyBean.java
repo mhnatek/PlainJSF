@@ -5,6 +5,7 @@
 package at.hnatek.plainjsf;
 
 import at.hnatek.utils.DTOComparator;
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,7 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean
 @SessionScoped
-public class MyBean {
+public class MyBean implements Serializable {
 
     // Init --------------------------------------------------------------------
     private MyData dataItem;

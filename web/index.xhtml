@@ -10,20 +10,33 @@
             <ui:define name="content">   
                 <h:form>
                     <div class="row">
-                        <div class="span8">
+                        <div class="span12">
                             <h1>Bootstrap starter template</h1>
-                            <p>Use this document as a way to quick start any new project.<br /> Old datatable demo 
-                                <h:link value="is here" outcome="datatable" />.</p>
+                            <p>Use this document as a way to quick start any new project.</p>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="span8">
-                            <h:dataTable id="hideme" value="#{myBean.dataList}" var="dataItem" binding="#{myBean.dataTable}" 
+                        <div class="span2">
+                            <div class="well" style="padding-top: 8px; padding-right: 0px; padding-bottom: 8px; padding-left: 0px;">
+                                <ul class="nav nav-list">
+                                    <li class="nav-header">Sidebar</li>
+                                    <li class="active"><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                    <li class="nav-header">Sidebar</li>
+                                    <li><a href="#">Link</a></li>
+                                    <li><a href="#">Link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="span10">
+                            <h:dataTable value="#{myBean.dataList}" var="dataItem" binding="#{myBean.dataTable}" 
                                          rows="10" styleClass="table table-striped table-bordered table-condensed">
 
                                 <f:facet name="header">
-                                    <h:outputText value="My own plan JSF DataTable" />
+                                    <h:outputText value="My own plain JSF DataTable" />
                                 </f:facet>
 
                                 <h:column>
@@ -95,12 +108,13 @@
 
                                         <h:commandButton value="last" action="#{myBean.pageLast}"
                                                          styleClass="btn" disabled="#{myBean.dataTable.first + myBean.dataTable.rows >= myBean.dataTable.rowCount}" />
+                                        
                                     </h:panelGroup>
                                 </f:facet>
                             </h:dataTable>
 
-                            <h:commandButton styleClass="btn" value="Add" action="#{myBean.addNewDataItem}" />
-                            <h:commandButton styleClass="btn" value="Get selected items" action="#{myBean.getSelectedItems}" />
+                            <h:commandButton styleClass="btn" value="Add" action="#{myBean.addNewDataItem}" />&#160;
+                            <h:commandButton styleClass="btn" value="Get selected items" action="#{myBean.getSelectedItems}" />&#160; 
                             <h:commandButton styleClass="btn" value="Test binding" action="#{myBean.testBinding}" />
                         </div>
                     </div>
@@ -112,7 +126,7 @@
                                 <h:outputText value="ID" />
                                 <h:inputText id="inId" value="#{myBean.dataItem.id}" 
                                              required="true" requiredMessage="Id ist erforderlich!" />
-                                <h:message for="inId" styleClass="label label-important" />
+                                <h:message for="inId" style="color: red;" />
 
                                 <h:outputText value="Name" />
                                 <h:inputText id="inName" value="#{myBean.dataItem.name}" 
@@ -129,7 +143,7 @@
                             </h:panelGrid>
                         </div>
                     </div>
-                    
+
                 </h:form>
             </ui:define>
         </ui:composition>
